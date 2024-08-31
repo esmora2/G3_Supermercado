@@ -1,0 +1,88 @@
+# Node modules
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Logs
+logs/
+*.log
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+build/
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# VSCode
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+
+# Ignore IDE and editor-specific files
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swo
+*.swp
+
+# Ignore any test results
+test-results/
+
+# Ignore lock files in case you're using Yarn
+yarn.lock
+
+# Ignore lock files for npm if using Yarn
+package-lock.json
+
+# Ignore any files related to logs or temporary data
+tmp/
+temp/
+
+# Ignore builds
+build/
+out/
+
+# Ignore Jest coverage directory
+jest-coverage/
+
+# Ignore parcel cache directory
+.cache/
+
+# Ignore docker-compose generated files
+docker-compose.yml
+docker-compose.override.yml
+docker-compose.prod.yml
+docker-compose.dev.yml
+
+# Ignore React specific files
+*.css.map
+*.js.map
+
+# Ignore specific files related to Express or Node.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore local environment files
+.env.local
+
+# Ignore miscellaneous files
+*.swp
+*.swo
+*.swn
+*.swn*
