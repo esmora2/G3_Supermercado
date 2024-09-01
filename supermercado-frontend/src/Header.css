@@ -1,0 +1,24 @@
+/* src/components/Header.css */
+.header {
+    background-color: #aff0ec;
+    color: #000000;
+    padding: 10px 20px;
+    text-align: center;
+    border-bottom: 2px solid #aff0ec;
+    position: fixed; /* Fija el header en la parte superior */
+    top: 0; /* Alinea el header con la parte superior de la página */
+    left: 0; /* Alinea el header con el borde izquierdo de la página */
+    width: 100%; /* Asegura que el header ocupe todo el ancho de la página */
+    z-index: 1000; /* Asegura que el header se superponga a otros elementos */
+    box-sizing: border-box; /* Incluye padding y border dentro del width */
+  }
+  
+  .header h1 {
+    margin: 0;
+    font-size: 2em;
+  }
+  
+  .app-container {
+    padding-top: 70px; /* Añade espacio para evitar que el contenido se superponga al header */
+  }
+  

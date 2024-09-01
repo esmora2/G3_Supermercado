@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../Form.css'; // Importa el CSS para aplicar estilos
 
 const SalesForm = () => {
   const [clients, setClients] = useState([]);
@@ -11,7 +12,7 @@ const SalesForm = () => {
   });
   const [newDetail, setNewDetail] = useState({
     idProduct: '',
-    quantity: '',
+    quantity: 1,
     price: ''
   });
 
@@ -43,14 +44,33 @@ const SalesForm = () => {
     });
   };
 
+  const handleProductChange = (e) => {
+    const productId = parseInt(e.target.value, 10);
+    const selectedProduct = products.find(product => product.id_product === productId);
+    setNewDetail(prevDetail => ({
+      ...prevDetail,
+      idProduct: productId,
+      price: selectedProduct ? selectedProduct.price : ''
+    }));
+  };
+
+  const handleQuantityChange = (e) => {
+    const quantity = e.target.value;
+    setNewDetail(prevDetail => ({
+      ...prevDetail,
+      quantity,
+      price: (quantity * (parseFloat(prevDetail.price) || 0)).toFixed(2)
+    }));
+  };
+
   const addDetail = () => {
-    setSale({
-      ...sale,
-      details: [...sale.details, newDetail]
-    });
+    setSale(prevSale => ({
+      ...prevSale,
+      details: [...prevSale.details, newDetail]
+    }));
     setNewDetail({
       idProduct: '',
-      quantity: '',
+      quantity: 1,
       price: ''
     });
   };
@@ -67,38 +87,53 @@ const SalesForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Registrar Venta</h2>
-      <select name="idClient" onChange={handleSaleChange}>
-        <option value="">Seleccionar Cliente</option>
-        {clients.map(client => (
-          <option key={client.id_client} value={client.id_client}>
-            {client.first_name} {client.last_name}
-          </option>
-        ))}
-      </select>
-      <input type="date" name="date" onChange={handleSaleChange} />
-      <h3>Detalles de la Venta</h3>
-      <select name="idProduct" onChange={handleDetailChange}>
-        <option value="">Seleccionar Producto</option>
-        {products.map(product => (
-          <option key={product.id_product} value={product.id_product}>
-            {product.description}
-          </option>
-        ))}
-      </select>
-      <input type="number" name="quantity" placeholder="Cantidad" onChange={handleDetailChange} />
-      <input type="number" name="price" placeholder="Precio" step="0.01" onChange={handleDetailChange} />
-      <button type="button" onClick={addDetail}>Agregar Detalle</button>
-      <ul>
-        {sale.details.map((detail, index) => (
-          <li key={index}>
-            Producto ID: {detail.idProduct}, Cantidad: {detail.quantity}, Precio: {detail.price}
-          </li>
-        ))}
-      </ul>
-      <button type="submit">Registrar Venta</button>
-    </form>
+    <div className="form-container">
+      <form onSubmit={handleSubmit}>
+        <h2>Registrar Venta</h2>
+        <select name="idClient" onChange={handleSaleChange} value={sale.idClient}>
+          <option value="">Seleccionar Cliente</option>
+          {clients.map(client => (
+            <option key={client.id_client} value={client.id_client}>
+              {client.first_name} {client.last_name}
+            </option>
+          ))}
+        </select>
+        <input type="date" name="date" value={sale.date} onChange={handleSaleChange} />
+        <h3>Detalles de la Venta</h3>
+        <select name="idProduct" onChange={handleProductChange} value={newDetail.idProduct}>
+          <option value="">Seleccionar Producto</option>
+          {products.map(product => (
+            <option key={product.id_product} value={product.id_product}>
+              {product.description}
+            </option>
+          ))}
+        </select>
+        <input 
+          type="number" 
+          name="quantity" 
+          placeholder="Cantidad" 
+          value={newDetail.quantity} 
+          onChange={handleQuantityChange} 
+        />
+        <input 
+          type="number" 
+          name="price" 
+          placeholder="Precio" 
+          step="0.01" 
+          value={newDetail.price} 
+          readOnly 
+        />
+        <button type="button" onClick={addDetail}>Agregar Detalle</button>
+        <ul>
+          {sale.details.map((detail, index) => (
+            <li key={index}>
+              {products.find(product => product.id_product === detail.idProduct)?.description} - Cantidad: {detail.quantity} - Precio: {detail.price}
+            </li>
+          ))}
+        </ul>
+        <button type="submit">Registrar Venta</button>
+      </form>
+    </div>
   );
 };
 

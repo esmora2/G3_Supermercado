@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../Form.css'; // Importa el CSS para aplicar estilos
 
 const ProductForm = () => {
   const [product, setProduct] = useState({
@@ -27,13 +28,15 @@ const ProductForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Registrar Producto</h2>
-      <input type="text" name="description" placeholder="Descripción" onChange={handleChange} />
-      <input type="number" name="price" placeholder="Precio" step="0.01" onChange={handleChange} />
-      <input type="number" name="stock" placeholder="Stock" onChange={handleChange} />
-      <button type="submit">Registrar</button>
-    </form>
+    <div className="form-container">
+      <form onSubmit={handleSubmit}>
+        <h2>Registrar Producto</h2>
+        <input type="text" name="description" placeholder="Descripción" onChange={handleChange} />
+        <input type="number" name="price" placeholder="Precio" step="0.01" onChange={handleChange} />
+        <input type="number" name="stock" placeholder="Stock" onChange={handleChange} />
+        <button type="submit">Registrar</button>
+      </form>
+    </div>
   );
 };
 

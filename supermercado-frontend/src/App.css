@@ -40,3 +40,20 @@
 .read-the-docs {
   color: #888;
 }
+
+/* App.css */
+.app-container {
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 30px;
+  font-size: 2em;
+}
+
+/* src/App.css */
+.content-container {
+  margin-left: 220px; /* Deja espacio para el sidebar */
+  padding: 20px; /* Añade un padding para el contenido */
+}
