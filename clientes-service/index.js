@@ -1,7 +1,11 @@
 const express = require('express');
 const { Pool } = require('pg');
+const cors = require('cors');
 const app = express();
 const port = 3003;
+
+// Configurar CORS
+app.use(cors());
 
 // Configurar la conexión a la base de datos
 const pool = new Pool({
@@ -38,6 +42,17 @@ app.post('/clients', async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).send('Error al crear cliente');
+    }
+});
+
+// Obtener tipos de ID
+app.get('/types', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM TYPE_ID'); // Asegúrate de que la tabla se llama TYPE_ID
+        res.json(result.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error al obtener tipos de ID');
     }
 });
 
