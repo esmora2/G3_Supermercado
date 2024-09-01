@@ -1,0 +1,15 @@
+.sales-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .sales-table th, .sales-table td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+  }
+  
+  .sales-table th {
+    background-color: #51899b;
+    text-align: left;
+  }
+  

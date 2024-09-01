@@ -18,6 +18,20 @@ const pool = new Pool({
 
 app.use(express.json());
 
+app.get('/sales', async (req, res) => {
+    try {
+      // Obtener las ventas más recientes ordenadas por fecha
+      const result = await pool.query(
+        'SELECT ID_CLIENT, ID_PRODUCT, DATE FROM SALES_DETAIL JOIN SALES ON SALES.ID_SALE = SALES_DETAIL.ID_SALE ORDER BY DATE DESC'
+      );
+      res.json(result.rows);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error al obtener las ventas');
+    }
+  });
+
+  
 // Crear una venta
 app.post('/sales', async (req, res) => {
     const { idClient, date, details } = req.body;

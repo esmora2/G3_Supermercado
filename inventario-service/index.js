@@ -78,6 +78,29 @@ app.post('/products/:id/stock', async (req, res) => {
     }
 });
 
+// Editar un producto
+app.put('/products/:id', async (req, res) => {
+    const { id } = req.params;
+    const { description, price } = req.body;
+
+    try {
+        const result = await pool.query(
+            'UPDATE PRODUCTS SET description = $1, price = $2 WHERE id_product = $3',
+            [description, price, id]
+        );
+
+        if (result.rowCount === 0) {
+            return res.status(404).send('Producto no encontrado');
+        }
+
+        res.status(200).send('Producto actualizado');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error al actualizar el producto');
+    }
+});
+
+
 app.listen(port, () => {
     console.log(`Inventario service listening at http://localhost:${port}`);
 });
