@@ -73,6 +73,8 @@ psql -h localhost -p 5434
 
 *Linux*
 sudo -u postgres psql -h localhost -p 5434
+
+*La contraseña deberia ser: "admin", y el user: "postgres"*
 ```
 
 -Una vez en el shell de postgres Crear la Base de Datos
