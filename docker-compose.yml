@@ -1,0 +1,51 @@
+version: '3'
+services:
+  ventas-service:
+    build:
+      context: ./ventas-service
+    ports:
+      - "3001:3001"
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: supermercado_antojitos
+
+  inventario-service:
+    build:
+      context: ./inventario-service
+    ports:
+      - "3002:3002"
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: supermercado_antojitos
+
+  clientes-service:
+    build:
+      context: ./clientes-service
+    ports:
+      - "3003:3003"
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: supermercado_antojitos
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: supermercado_antojitos
+    ports:
+      - "5434:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

@@ -64,7 +64,6 @@ jest-coverage/
 .cache/
 
 # Ignore docker-compose generated files
-docker-compose.yml
 docker-compose.override.yml
 docker-compose.prod.yml
 docker-compose.dev.yml
